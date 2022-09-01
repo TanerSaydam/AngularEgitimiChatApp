@@ -17,12 +17,12 @@ export class AuthService {
   ) { }
 
   login(model: LoginModel){
-    let api = this.apiUrl + "auth/login";   
+    let api = this.apiUrl + "chatAuth/login";   
     return this._http.post<any>(api,model);
   }
 
   register(formData: any){
-    let api = this.apiUrl + "auth/register";
+    let api = this.apiUrl + "chatAuth/register";
     return this._http.post<any>(api, formData);
   }
 
