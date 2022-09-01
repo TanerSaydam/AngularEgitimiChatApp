@@ -1,0 +1,89 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card chat-app">
+                <div id="plist" class="people-list">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="filterText">
+                    </div>
+                    <ul class="list-unstyled chat-list mt-2 mb-0">
+                        <li class="clearfix" *ngFor="let user of chatUsers | chatPipe: filterText" (click)="getUserChats(user.userId)">                            
+                            <img src="/assets/chat/avatars/{{user.avatar}}" alt="avatar">
+                            <div class="about">
+                                <div class="name">
+                                    {{user.userName}}
+                                    <span class="badge bg-secondary" *ngIf="user.unReadMessageCount>0">{{user.unReadMessageCount}}</span>
+                                </div>
+                            </div>                            
+                        </li>
+                    </ul>
+                </div>
+                <div class="chat" style="min-height: 650px;" *ngIf="toUserId > 0">
+                    <div class="chat-header clearfix">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                    <img src="/assets/chat/avatars/{{toUserAvatar == '' ? '49ea5d4d-ec44-4f83-81e9-446bf24cf666.jpg' : toUserAvatar}}" alt="avatar">
+                                </a>
+                                <div class="chat-about">
+                                    <h6 class="m-b-0" [innerText]="toUserName"></h6>
+                                </div>
+                            </div>                           
+                        </div>
+                    </div>
+                    <div class="chat-history" style="height: 700px; overflow-y: auto;" #scrollMe
+                    [scrollTop]="scrollMe.scrollHeight">
+                        <ul class="m-b-0">
+                            <li class="clearfix" *ngFor="let chat of chats">
+                                <div *ngIf="chat.date != undefined">
+                                    <div *ngIf="chat.userId == userId">
+                                        
+                                        <div class="message other-message float-right">
+                                            {{chat.message}}
+                                            <i class="fa-solid fa-check" *ngIf="!chat.isRead"></i>
+                                            <i class="fa-solid fa-check-double text-primary" *ngIf="chat.isRead"></i>
+                                        </div>
+                                        <br>                                        
+                                        <br>
+                                        <div class="message-data text-right">
+                                            <br>
+                                            <span class="message-data-time float-right" style="font-size: xx-small;" [innerText]="chat.date | date: 'dd.MM.yyyy HH:mm:ss'"></span>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="chat.userId != userId">
+                                        <div class="message my-message">
+                                            {{chat.message}}                                            
+                                        </div>                                        
+                                        <br>
+                                        <br>
+                                        <div class="message-data">
+                                            <span class="message-data-time" style="font-size:xx-small;" [innerText]="chat.date  | date: 'dd.MM.yyyy HH:mm:ss'"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="chat.date == undefined">
+                                    <h6>Gösterilecek mesaj yok</h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="chat-message clearfix">
+                        <div class="input-group mb-0">
+                            <span class="input-group-text"><i class="fa fa-send"></i></span>
+                            <input type="text" class="form-control" [(ngModel)]="message" placeholder="Mesajınızı yazın..." (keydown.enter)="sendMessage()">
+                        </div>
+                    </div>
+                </div>
+                <div class="chat" style="min-height: 650px;" *ngIf="toUserId == 0">
+                    <h5 class="mt-2 mx-2">Gösterilecek mesaj yok</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
