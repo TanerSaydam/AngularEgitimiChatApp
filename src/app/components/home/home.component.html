@@ -13,7 +13,7 @@
                     </div>
                     <ul class="list-unstyled chat-list mt-2 mb-0">
                         <li class="clearfix" *ngFor="let user of chatUsers | chatPipe: filterText" (click)="getUserChats(user.userId)">                            
-                            <img src="/assets/chat/avatars/{{user.avatar}}" alt="avatar">
+                            <img src="{{fileUrl}}/avatars/{{user.avatar}}" alt="avatar">
                             <div class="about">
                                 <div class="name">
                                     {{user.userName}}
@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                    <img src="/assets/chat/avatars/{{toUserAvatar == '' ? '49ea5d4d-ec44-4f83-81e9-446bf24cf666.jpg' : toUserAvatar}}" alt="avatar">
+                                    <img src="{{fileUrl}}/avatars/{{toUserAvatar == '' ? '49ea5d4d-ec44-4f83-81e9-446bf24cf666.jpg' : toUserAvatar}}" alt="avatar">
                                 </a>
                                 <div class="chat-about">
                                     <h6 class="m-b-0" [innerText]="toUserName"></h6>

@@ -1,4 +1,5 @@
 import { AfterContentChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { ChatUserModel } from './model/chat-user.model';
 import { ChatModel } from './model/chat.model';
 import { ChatService } from './service/chat.service';
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit, AfterContentChecked {
   toUserName: string = "";
   toUserAvatar: string = "";
   filterText: string = "";
+  fileUrl: string = environment.fileUrl;
 
 
   constructor(
