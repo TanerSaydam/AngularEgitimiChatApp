@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit, AfterContentChecked {
     private _cdref: ChangeDetectorRef
   ) {
     this.getUserId();
-    this._signalR.start("https://localhost:7146/chat-hub")
+    this._signalR.start("https://angularegitimleriapi.ecnorow.com/chat-hub")
    }
   ngAfterContentChecked(): void {
     //this.sampleViewModel.DataContext = this.DataContext;
